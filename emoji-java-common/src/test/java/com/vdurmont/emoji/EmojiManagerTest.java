@@ -8,6 +8,7 @@ import org.xeustechnologies.jcl.JarClassLoader;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -18,7 +19,7 @@ import static org.junit.Assert.*;
 @RunWith(JUnit4.class)
 public class EmojiManagerTest {
   @Test
-  public void getForTag_with_unknown_tag_returns_null() throws IOException {
+  public void getForTag_with_unknown_tag_returns_null() {
     // GIVEN
 
     // WHEN
@@ -29,7 +30,7 @@ public class EmojiManagerTest {
   }
 
   @Test
-  public void getForTag_returns_the_emojis_for_the_tag() throws IOException {
+  public void getForTag_returns_the_emojis_for_the_tag() {
     // GIVEN
 
     // WHEN
@@ -47,7 +48,19 @@ public class EmojiManagerTest {
   }
 
   @Test
-  public void getForAlias_with_unknown_alias_returns_null() throws IOException {
+  public void getForTag_returns_the_eu_emoji_for_same_tag() {
+    // GIVEN
+
+    // WHEN
+    Set<Emoji> emojis = EmojiManager.getForTag("european union");
+
+    // THEN
+    assertEquals(1, emojis.size());
+    assertTrue(TestTools.containsEmojis(emojis, "eu"));
+  }
+
+  @Test
+  public void getForAlias_with_unknown_alias_returns_null() {
     // GIVEN
 
     // WHEN
@@ -58,7 +71,7 @@ public class EmojiManagerTest {
   }
 
   @Test
-  public void getForAlias_returns_the_emoji_for_the_alias() throws IOException {
+  public void getForAlias_returns_the_emoji_for_the_alias() {
     // GIVEN
 
     // WHEN
@@ -72,8 +85,7 @@ public class EmojiManagerTest {
   }
 
   @Test
-  public void getForAlias_with_colons_returns_the_emoji_for_the_alias()
-    throws IOException {
+  public void getForAlias_with_colons_returns_the_emoji_for_the_alias() {
     // GIVEN
 
     // WHEN
@@ -135,6 +147,42 @@ public class EmojiManagerTest {
   }
 
   @Test
+  public void containsEmoji_with_fitzpatric_modifier_returns_true() {
+    // GIVEN
+    String emoji = "\uD83E\uDD30\uD83C\uDFFB";
+
+    // WHEN
+    boolean containsEmoji = EmojiManager.containsEmoji(emoji);
+
+    // THEN
+    assertTrue(containsEmoji);
+  }
+
+  @Test
+  public void containsEmoji_for_a_non_emoji_returns_false() {
+    // GIVEN
+    String str = "test";
+
+    // WHEN
+    boolean containsEmoji = EmojiManager.containsEmoji(str);
+
+    // THEN
+    assertFalse(containsEmoji);
+  }
+
+  @Test
+  public void containsEmoji_for_an_emoji_and_other_chars_returns_true() {
+    // GIVEN
+    String str = "😀 test";
+
+    // WHEN
+    boolean containsEmoji = EmojiManager.containsEmoji(str);
+
+    // THEN
+    assertTrue(containsEmoji);
+  }
+
+  @Test
   public void isOnlyEmojis_for_an_emoji_returns_true() {
     // GIVEN
     String str = "😀";
@@ -179,7 +227,7 @@ public class EmojiManagerTest {
 
     // THEN
     // We know the number of distinct tags int the...!
-    assertEquals(594, tags.size());
+    assertEquals(656, tags.size());
   }
 
   @Test
@@ -244,5 +292,13 @@ public class EmojiManagerTest {
 
     System.clearProperty(PATH);
     System.clearProperty(SET);
+  }
+
+  @Test
+  public void getByUnicode_returns_correct_emoji() {
+    String wavingHand = "\uD83D\uDC4B";
+    Emoji e = EmojiManager.getByUnicode(wavingHand);
+    assertEquals(wavingHand, e.getUnicode());
+    assertEquals("waving hand sign", e.getDescription());
   }
 }

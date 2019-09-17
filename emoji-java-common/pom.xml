@@ -5,7 +5,7 @@
     <parent>
         <artifactId>emoji-java-root</artifactId>
         <groupId>com.vdurmont</groupId>
-        <version>4.0.0</version>
+        <version>5.1.1-vega</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
