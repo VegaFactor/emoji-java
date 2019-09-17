@@ -4,7 +4,7 @@
 
     <groupId>com.vdurmont</groupId>
     <artifactId>emoji-java-root</artifactId>
-    <version>5.1.1</version>
+    <version>5.1.1-vega</version>
     <modules>
         <module>emoji-java-common</module>
         <module>emoji-java</module>

@@ -23,7 +23,7 @@ import java.security.cert.X509Certificate;
  */
 public class UnicodeyImporter {
 
-  private static final String JSON_URL = "https://unicodey.com/emoji-data/emoji_pretty.json";
+  private static final String JSON_URL = "https://unicodey.com/emoji-data/emoji.json";
 
   
   private static final void initSSL() throws KeyManagementException, NoSuchAlgorithmException {
