@@ -96,7 +96,8 @@ public class UnicodeyImporter {
       String escapedString = getEncodedFromUnified(emoji.getString("unified"));
       jsonWriter.name("emojiChar").value(emojiChar);
       jsonWriter.name("emoji").value(escapedString);
-      jsonWriter.name("description").value("");
+      jsonWriter.name("description").value( emoji.optString("name", "") );
+      jsonWriter.name("supports_fitzpatrick").value(emoji.has("skin_variations"));
 
       jsonWriter.name("aliases").beginArray();
       for(int j=0; j<emoji.getJSONArray("short_names").length(); j++) {
