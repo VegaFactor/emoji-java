@@ -40,6 +40,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -152,9 +154,9 @@
 <!--        </repository>-->
 
         <repository>
-            <id>bintray-vegafactor-maven</id>
-            <name>vegafactor-maven</name>
-            <url>https://api.bintray.com/maven/vegafactor/maven/emoji-java/;publish=1</url>
+            <id>github</id>
+            <name>GitHub VegaFactor Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/VegaFactor/emoji-java</url>
         </repository>
     </distributionManagement>
 </project>
